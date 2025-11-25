@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note de Frais Kilométriques - Multi-Sociétés</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e74c3c; /* Rouge pour supprimer */
+            --light: #f9f9f9;
+            --border: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Container A4 */
+        .page-a4 {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 20mm; /* Marges standard */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Header de configuration (Ne s'imprime pas) */
+        .config-bar {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 210mm;
+            margin: 0 auto 20px auto;
+        }
+
+        .config-bar select {
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            font-size: 14px;
+            min-width: 250px;
+        }
+
+        .btn-print {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+const societes = [
+    {
+        nom: "CABINET TICÔK & ASSOCIES",
+        adresse: "12 Rue de la Comptabilité, 75000 Paris",
+        siret: "123 456 789 00012"
+    },
+    // ...
+];
