@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,303 +7,331 @@
     <style>
         :root {
             --primary: #2c3e50;
-            --secondary: #34495e;
+            --primary-light: #34495e;
             --accent: #e74c3c;
-            /* Rouge pour supprimer */
-            --light: #f9f9f9;
-            --border: #bdc3c7;
+            --success: #27ae60;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
             margin: 0;
-            padding: 20px;
-            color: #333;
+            padding: 40px 20px;
+            color: var(--text-color);
+            line-height: 1.5;
         }
 
         /* Container A4 */
         .page-a4 {
-            background: white;
+            background: var(--card-bg);
             width: 210mm;
             min-height: 297mm;
             margin: 0 auto;
             padding: 20mm;
-            /* Marges standard */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             box-sizing: border-box;
             position: relative;
+            border-radius: 8px;
         }
 
-        /* Header de configuration (Ne s'imprime pas) */
+        /* Header de configuration */
         .config-bar {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            background: white;
+            color: var(--text-color);
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 210mm;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 30px auto;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .config-bar label {
+            font-weight: 600;
+            margin-right: 10px;
+            color: var(--primary);
         }
 
         .config-bar select {
-            padding: 8px;
-            border-radius: 4px;
-            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
             font-size: 14px;
             min-width: 250px;
+            background-color: #f9fafb;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .config-bar select:focus {
+            border-color: var(--primary);
+            outline: none;
         }
 
         .btn-print {
-            background: white;
-            color: var(--primary);
+            background: var(--primary);
+            color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-
-        .btn-print:hover {
-            background: #eee;
-        }
+        
+        .btn-print:hover { background: var(--primary-light); }
 
         /* Header avec Logo */
         .header-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 3px solid var(--primary);
-            margin-bottom: 30px;
-            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
         }
 
         .header-container h1 {
             border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+            margin: 0;
+            padding: 0;
             flex-grow: 1;
-            text-align: center;
+            text-align: right;
             text-transform: uppercase;
-            font-size: 22px;
+            font-size: 24px;
             color: var(--primary);
+            letter-spacing: 1px;
         }
 
         .logo {
-            height: 60px;
+            height: 80px;
             width: auto;
+            object-fit: contain;
         }
 
         h2 {
-            font-size: 14px;
-            background: #ecf0f1;
-            padding: 5px 10px;
-            border-left: 5px solid var(--primary);
-            margin-top: 20px;
-            color: var(--secondary);
+            font-size: 16px;
+            background: #f8fafc;
+            padding: 10px 15px;
+            border-left: 4px solid var(--primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+            border-radius: 0 4px 4px 0;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
 
-        .grid-4 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 15px;
+        .field-group { margin-bottom: 15px; }
+        .field-group label { 
+            display: block; 
+            font-size: 12px; 
+            color: #6b7280; 
+            font-weight: 600; 
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
-
-        .field-group {
-            margin-bottom: 8px;
-        }
-
-        .field-group label {
-            display: block;
-            font-size: 11px;
-            color: #7f8c8d;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-
+        
         input {
             width: 100%;
-            padding: 5px;
-            border: 1px solid var(--border);
-            border-radius: 3px;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 14px;
             box-sizing: border-box;
+            transition: all 0.2s;
+            background-color: #fff;
         }
 
-        input:focus {
-            border-color: var(--primary);
-            outline: none;
-            background: #fdfdfd;
+        input:focus { 
+            border-color: var(--primary); 
+            outline: none; 
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
         }
 
         /* Tableaux */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 12px;
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 20px; 
+            font-size: 13px; 
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td { 
+            border-bottom: 1px solid var(--border-color); 
+            padding: 12px 15px; 
+            text-align: left; 
+        }
+        
+        th { 
+            background: #f8fafc; 
+            color: var(--primary); 
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
         }
 
-        th,
-        td {
-            border: 1px solid var(--border);
-            padding: 6px;
-            text-align: left;
-        }
-
-        th {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            font-weight: normal;
-        }
-
+        tr:last-child td { border-bottom: none; }
+        
         /* Colonnes spécifiques */
-        .col-date {
-            width: 90px;
-        }
+        .col-date { width: 110px; }
+        .col-km { width: 80px; text-align: right; }
+        .col-action { width: 40px; text-align: center; background: white; border-left: 1px solid var(--border-color); }
 
-        .col-km {
-            width: 60px;
-            text-align: right;
+        /* Inputs dans le tableau */
+        td input {
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 5px;
         }
-
-        .col-action {
-            width: 30px;
-            text-align: center;
-            border: none;
-            background: white;
-        }
+        td input:hover { border-color: var(--border-color); background: white; }
+        td input:focus { border-color: var(--primary); background: white; }
 
         .btn-del {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            font-size: 16px;
+            background: #fee2e2; 
+            border: none; 
+            color: var(--accent); 
+            cursor: pointer; 
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px; 
             font-weight: bold;
+            transition: all 0.2s;
         }
-
-        .btn-del:hover {
-            color: darkred;
-        }
+        .btn-del:hover { background: var(--accent); color: white; }
 
         .btn-add-row {
-            margin-top: 10px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
+            margin-top: 15px;
+            background: white;
+            color: var(--success);
+            border: 1px solid var(--success);
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
+        .btn-add-row:hover { background: var(--success); color: white; }
 
         /* Totaux et Signatures */
         .totals-section {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             justify-content: flex-end;
         }
 
         .total-box {
-            width: 50%;
-            border: 2px solid var(--primary);
-            padding: 15px;
-            background: #f8f9fa;
+            width: 40%;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
         .total-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             align-items: center;
+            font-size: 14px;
         }
 
-        .final-amount {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary);
-            border-top: 1px solid #ccc;
-            padding-top: 10px;
+        .final-amount { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: var(--primary); 
+            border-top: 2px solid var(--border-color); 
+            padding-top: 15px; 
+            margin-top: 5px;
         }
 
         .signatures {
-            margin-top: 40px;
+            margin-top: 60px;
             display: flex;
             justify-content: space-between;
-            height: 120px;
+            gap: 40px;
         }
-
-        .sign-block {
-            width: 45%;
-            border: 1px solid #ccc;
-            padding: 10px;
-            font-size: 12px;
+        .sign-block { 
+            flex: 1;
+            border: 1px solid var(--border-color); 
+            padding: 20px; 
+            font-size: 13px; 
+            border-radius: 8px;
+            height: 150px;
+            background: #fff;
         }
+        
+        .sign-block strong { display: block; margin-bottom: 5px; color: var(--primary); }
 
         .footer-legal {
-            margin-top: 30px;
-            font-size: 9px;
-            color: #95a5a6;
-            text-align: justify;
-            font-style: italic;
+            margin-top: 50px;
+            font-size: 10px;
+            color: #9ca3af;
+            text-align: center;
+            line-height: 1.6;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* IMPRESSION */
         @media print {
-            body {
-                background: none;
-                margin: 0;
-                padding: 0;
-            }
-
-            .page-a4 {
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                padding: 0;
-                min-height: auto;
-            }
-
-            .config-bar,
-            .btn-add-row,
-            .col-action,
-            .btn-del {
-                display: none !important;
-            }
-
-            /* On cache la colonne action dans le tableau à l'impression */
-            th.col-action,
-            td.col-action {
-                display: none;
-            }
-
-            input {
+            body { background: none; margin: 0; padding: 0; }
+            .page-a4 { 
+                box-shadow: none; 
+                margin: 0; 
+                width: 100%; 
+                padding: 0; 
+                min-height: auto; 
                 border: none;
-                border-bottom: 1px dotted #ccc;
-                background: transparent;
+            }
+            .config-bar, .btn-add-row, .col-action, .btn-del { display: none !important; }
+            th.col-action, td.col-action { display: none; }
+            
+            input { 
+                border: none; 
                 padding: 0;
+                background: transparent !important;
             }
-
-            /* Optionnel: masquer les placeholders à l'impression */
-            input::placeholder {
-                color: transparent;
-            }
+            
+            /* Souligner les champs vides pour l'impression si nécessaire */
+            input[value=""] { border-bottom: 1px dotted #ccc; }
+            
+            h2 { background: none; border-left: none; border-bottom: 2px solid var(--primary); padding-left: 0; }
+            th { background: none; color: black; border-bottom: 2px solid black; }
+            td { border-bottom: 1px solid #ddd; }
+            .total-box { background: none; border: 2px solid black; }
         }
     </style>
 </head>
-
 <body>
 
     <!-- BARRE DE CONFIGURATION (Invisible à l'impression) -->
@@ -315,120 +342,129 @@
                 <option value="">-- Sélectionner une société --</option>
                 <!-- Les options sont remplies par JS -->
             </select>
-            <h2>1. L'Entreprise</h2>
-            <div class="field-group">
-                <label>Dénomination Sociale</label>
-                <input type="text" id="soc_nom" placeholder="Nom de la société...">
-            </div>
-            <div class="field-group">
-                <label>Adresse</label>
-                <input type="text" id="soc_adresse" placeholder="Adresse complète...">
-            </div>
-            <div class="field-group">
-                <label>N° SIRET</label>
-                <input type="text" id="soc_siret" placeholder="XXX XXX XXX XXXXX">
-            </div>
         </div>
-
-        <!-- SALARIÉ -->
-        <div>
-            <h2>2. Le Bénéficiaire</h2>
-            <div class="field-group">
-                <label>Nom et Prénom</label>
-                <input type="text" placeholder="ex: Ton Nom">
-            </div>
-            <div class="field-group">
-                <label>Fonction</label>
-                <input type="text" placeholder="ex: Gérant / Salarié">
-            </div>
-            <div class="field-group">
-                <label>Adresse personnelle</label>
-                <input type="text" placeholder="Adresse perso...">
-            </div>
-        </div>
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimer / PDF</button>
     </div>
 
-    <!-- VÉHICULE -->
-    <h2>3. Véhicule (Obligatoire pour calcul URSSAF)</h2>
-    <div class="grid-4">
-        <div class="field-group">
-            <label>Marque / Modèle</label>
-            <input type="text" placeholder="ex: Renault Clio">
+    <!-- DOCUMENT A4 -->
+    <div class="page-a4">
+        <div class="header-container">
+            <img src="./images/logo.jpg" alt="Logo" class="logo">
+            <h1>État de Frais Kilométriques</h1>
         </div>
-        <div class="field-group">
-            <label>Immatriculation</label>
-            <input type="text" placeholder="AA-000-BB">
-        </div>
-        <div class="field-group">
-            <label>Puissance Fiscale (CV)</label>
-            <input type="text" placeholder="ex: 5">
-        </div>
-        <div class="field-group">
-            <label>Carburant</label>
-            <input type="text" placeholder="Diesel/Essence">
-        </div>
-    </div>
 
-    <!-- TABLEAU TRAJETS -->
-    <h2>4. Détail des déplacements</h2>
-    <table id="tableTrajets">
-        <thead>
-            <tr>
-                <th class="col-date">Date</th>
-                <th>Départ</th>
-                <th>Arrivée</th>
-                <th>Motif (Détaillé)</th>
-                <th class="col-km">Km</th>
-                <th class="col-action"></th> <!-- Colonne poubelle -->
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Lignes générées par JS -->
-        </tbody>
-    </table>
-    <button class="btn-add-row" onclick="ajouterLigne()">+ Ajouter une ligne</button>
+        <div class="grid-2">
+            <!-- SOCIÉTÉ -->
+            <div>
+                <h2>1. L'Entreprise</h2>
+                <div class="field-group">
+                    <label>Dénomination Sociale</label>
+                    <input type="text" id="soc_nom" placeholder="Nom de la société...">
+                </div>
+                <div class="field-group">
+                    <label>Adresse</label>
+                    <input type="text" id="soc_adresse" placeholder="Adresse complète...">
+                </div>
+                <div class="field-group">
+                    <label>N° SIRET</label>
+                    <input type="text" id="soc_siret" placeholder="XXX XXX XXX XXXXX">
+                </div>
+            </div>
 
-    <!-- CALCULS -->
-    <div class="totals-section">
-        <div class="total-box">
-            <div class="total-row">
-                <span>Total Kilomètres :</span>
-                <strong id="totalKmDisplay">0</strong>
-            </div>
-            <div class="total-row">
-                <span>Barème appliqué (€/km) :</span>
-                <input type="number" id="tauxInput" step="0.001" value="0.603" style="width: 80px; text-align:right;"
-                    oninput="calculerMontant()">
-            </div>
-            <div class="total-row final-amount">
-                <span>TOTAL À REMBOURSER :</span>
-                <span><span id="montantFinal">0.00</span> €</span>
+            <!-- SALARIÉ -->
+            <div>
+                <h2>2. Le Bénéficiaire</h2>
+                <div class="field-group">
+                    <label>Nom et Prénom</label>
+                    <input type="text" placeholder="ex: Ton Nom">
+                </div>
+                <div class="field-group">
+                    <label>Fonction</label>
+                    <input type="text" placeholder="ex: Gérant / Salarié">
+                </div>
+                <div class="field-group">
+                    <label>Adresse personnelle</label>
+                    <input type="text" placeholder="Adresse perso...">
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- SIGNATURES -->
-    <div class="signatures">
-        <div class="sign-block">
-            <strong>Le Salarié / Demandeur</strong><br>
-            <span style="font-size:10px; color:#666;">Je certifie l'exactitude des frais et être assuré pour usage
-                pro.</span>
-            <div style="margin-top:15px;">Date : <input type="date" style="display:inline; width:auto; border:none;">
+        <!-- VÉHICULE -->
+        <h2>3. Véhicule (Obligatoire pour calcul URSSAF)</h2>
+        <div class="grid-4">
+            <div class="field-group">
+                <label>Marque / Modèle</label>
+                <input type="text" placeholder="ex: Renault Clio">
             </div>
-            <div style="margin-top:15px;">Signature :</div>
+            <div class="field-group">
+                <label>Immatriculation</label>
+                <input type="text" placeholder="AA-000-BB">
+            </div>
+            <div class="field-group">
+                <label>Puissance Fiscale (CV)</label>
+                <input type="text" placeholder="ex: 5">
+            </div>
+            <div class="field-group">
+                <label>Carburant</label>
+                <input type="text" placeholder="Diesel/Essence">
+            </div>
         </div>
-        <div class="sign-block">
-            <strong>L'Entreprise (Validation)</strong><br>
-            <span style="font-size:10px; color:#666;">Bon pour accord.</span>
-            <div style="margin-top:50px;">Signature :</div>
-        </div>
-    </div>
 
-    <div class="footer-legal">
-        Justificatif comptable à conserver. En application de l'article L. 242-1 du Code de la sécurité sociale. Le
-        motif du déplacement doit être justifié précisément pour permettre le contrôle de l'intérêt professionnel.
-        La copie de la carte grise doit être annexée.
-    </div>
+        <!-- TABLEAU TRAJETS -->
+        <h2>4. Détail des déplacements</h2>
+        <table id="tableTrajets">
+            <thead>
+                <tr>
+                    <th class="col-date">Date</th>
+                    <th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Motif (Détaillé)</th>
+                    <th class="col-km">Km</th>
+                    <th class="col-action"></th> <!-- Colonne poubelle -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Lignes générées par JS -->
+            </tbody>
+        </table>
+        <button class="btn-add-row" onclick="ajouterLigne()">+ Ajouter une ligne</button>
+
+        <!-- CALCULS -->
+        <div class="totals-section">
+            <div class="total-box">
+                <div class="total-row">
+                    <span>Total Kilomètres :</span>
+                    <strong id="totalKmDisplay">0</strong>
+                </div>
+                <div class="total-row">
+                    <span>Barème appliqué (€/km) :</span>
+                    <input type="number" id="tauxInput" step="0.001" value="0.603" style="width: 80px; text-align:right;" oninput="calculerMontant()">
+                </div>
+                <div class="total-row final-amount">
+                    <span>TOTAL À REMBOURSER :</span>
+                    <span><span id="montantFinal">0.00</span> €</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIGNATURES -->
+        <div class="signatures">
+            <div class="sign-block">
+                <strong>Le Salarié / Demandeur</strong><br>
+                <span style="font-size:10px; color:#666;">Je certifie l'exactitude des frais et être assuré pour usage pro.</span>
+                <div style="margin-top:15px;">Date : <input type="date" style="display:inline; width:auto; border:none;"></div>
+                <div style="margin-top:15px;">Signature :</div>
+            </div>
+            <div class="sign-block">
+                <strong>L'Entreprise (Validation)</strong><br>
+                <span style="font-size:10px; color:#666;">Bon pour accord.</span>
+                <div style="margin-top:50px;">Signature :</div>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            Justificatif comptable à conserver. En application de l'article L. 242-1 du Code de la sécurité sociale. Le motif du déplacement doit être justifié précisément pour permettre le contrôle de l'intérêt professionnel. La copie de la carte grise doit être annexée.
+        </div>
     </div>
 
     <script>
@@ -482,7 +518,7 @@
         function ajouterLigne() {
             const tbody = document.querySelector('#tableTrajets tbody');
             const row = document.createElement('tr');
-
+            
             row.innerHTML = `
                 <td><input type="date"></td>
                 <td><input type="text"></td>
@@ -507,7 +543,7 @@
         function calculerTotaux() {
             const inputs = document.querySelectorAll('.km-input');
             let totalKm = 0;
-
+            
             inputs.forEach(inp => {
                 const val = parseFloat(inp.value);
                 if (!isNaN(val)) {
@@ -524,18 +560,17 @@
             if (km === null) {
                 km = parseFloat(document.getElementById('totalKmDisplay').innerText) || 0;
             }
-
+            
             const taux = parseFloat(document.getElementById('tauxInput').value) || 0;
             const totalEuros = km * taux;
-
+            
             document.getElementById('montantFinal').innerText = totalEuros.toFixed(2);
         }
 
         // Au chargement, on ajoute 4 lignes vides
-        window.onload = function () {
-            for (let i = 0; i < 4; i++) ajouterLigne();
+        window.onload = function() {
+            for(let i=0; i<4; i++) ajouterLigne();
         };
     </script>
 </body>
-
 </html>
