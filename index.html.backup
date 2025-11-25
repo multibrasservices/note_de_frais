@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note de Frais Kilométriques - Multi-Sociétés</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --primary-light: #34495e;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+
+            .btn-del {
+                display: none !important;
+            }
+
+            th.col-action,
+            td.col-action {
+                display: none;
+            }
+
+            input {
+                border: none;
+                padding: 0;
+                background: transparent !important;
+            }
+
+            /* Souligner les champs vides pour l'impression si nécessaire */
+            input[value=""] {
+                border-bottom: 1px dotted #ccc;
+            }
+
+            h2 {
+                background: none;
+                border-left: none;
+                border-bottom: 2px solid var(--primary);
+                padding-left: 0;
+            }
+
+            th {
+                background: none;
+                color: black;
+                border-bottom: 2px solid black;
+            }
+
+            td {
+                border-bottom: 1px solid #ddd;
+            }
+
+            .total-box {
+                background: none;
+                border: 2px solid black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRE DE CONFIGURATION (Invisible à l'impression) -->
+    <div class="config-bar">
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label>Choisir la structure :</label>
+            <select id="companySelector" onchange="changerSociete()">
+                <option value="">-- Sélectionner une société --</option>
+                <!-- Les options sont remplies par JS -->
+            </select>
+        </div>
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimer / PDF</button>
+    </div>
+
+    <!-- DOCUMENT A4 -->
+    <div class="page-a4">
+        <div class="header-container">
+            <img src="./images/logo.jpg" alt="Logo" class="logo">
+            <h1>État de Frais Kilométriques</h1>
+        </div>
+
+        <div class="grid-2">
+            <!-- SOCIÉTÉ -->
+            <div>
+                <h2>1. L'Entreprise</h2>
+                <div class="field-group">
+                    <label>Dénomination Sociale</label>
+                    <input type="text" id="soc_nom" placeholder="Nom de la société...">
+                </div>
+                <div class="field-group">
+                    <label>Adresse</label>
+                    <input type="text" id="soc_adresse" placeholder="Adresse complète...">
+                </div>
+                <div class="field-group">
+                    <label>N° SIRET</label>
+                    <input type="text" id="soc_siret" placeholder="XXX XXX XXX XXXXX">
+                </div>
+            </div>
+
+            <!-- SALARIÉ -->
+            <div>
+                <h2>2. Le Bénéficiaire</h2>
+                <div class="field-group">
+                    <label>Nom et Prénom</label>
+                    <input type="text" placeholder="ex: Ton Nom">
+                </div>
+                <div class="field-group">
+                    <label>Fonction</label>
+                    <input type="text" placeholder="ex: Gérant / Salarié">
+                </div>
+                <div class="field-group">
+                    <label>Adresse personnelle</label>
+                    <input type="text" placeholder="Adresse perso...">
+                </div>
+            </div>
+        </div>
+
+        <!-- VÉHICULE -->
+        <h2>3. Véhicule (Obligatoire pour calcul URSSAF)</h2>
+        <div class="grid-4">
+            <div class="field-group">
+                <label>Marque / Modèle</label>
+                <input type="text" placeholder="ex: Renault Clio">
+            </div>
+            <div class="field-group">
+                <label>Immatriculation</label>
+                <input type="text" placeholder="AA-000-BB">
+            </div>
+            <div class="field-group">
+                <label>Puissance Fiscale (CV)</label>
+                <input type="text" placeholder="ex: 5">
+            </div>
+            <div class="field-group">
+                <label>Carburant</label>
+                <input type="text" placeholder="Diesel/Essence">
+            </div>
+        </div>
+
+        <!-- TABLEAU TRAJETS -->
+        <h2>4. Détail des déplacements</h2>
+        <table id="tableTrajets">
+            <thead>
+                <tr>
+                    <th class="col-date">Date</th>
+                    <th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Motif (Détaillé)</th>
+                    <th class="col-km">Km</th>
+                    <th class="col-action"></th> <!-- Colonne poubelle -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Lignes générées par JS -->
+            </tbody>
+        </table>
+        <button class="btn-add-row" onclick="ajouterLigne()">+ Ajouter une ligne</button>
+
+        <!-- CALCULS -->
+        <div class="totals-section">
+            <div class="total-box">
+                <div class="total-row">
+                    <span>Total Kilomètres :</span>
+                    <strong id="totalKmDisplay">0</strong>
+                </div>
+                <div class="total-row">
+                    <span>Barème appliqué (€/km) :</span>
+                    <input type="number" id="tauxInput" step="0.001" value="0.603"
+                        style="width: 80px; text-align:right;" oninput="calculerMontant()">
+                </div>
+                <div class="total-row final-amount">
+                    <span>TOTAL À REMBOURSER :</span>
+                    <span><span id="montantFinal">0.00</span> €</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIGNATURES -->
+        <div class="signatures">
+            <div class="sign-block">
+                <strong>Le Salarié / Demandeur</strong><br>
+                <span style="font-size:10px; color:#666;">Je certifie l'exactitude des frais et être assuré pour usage
+                    pro.</span>
+                <div style="margin-top:15px;">Date : <input type="date"
+                        style="display:inline; width:auto; border:none;"></div>
+                <div style="margin-top:15px;">Signature :</div>
+            </div>
+            <div class="sign-block">
+                <strong>L'Entreprise (Validation)</strong><br>
+                <span style="font-size:10px; color:#666;">Bon pour accord.</span>
+                <div style="margin-top:50px;">Signature :</div>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            Justificatif comptable à conserver. En application de l'article L. 242-1 du Code de la sécurité sociale. Le
+            motif du déplacement doit être justifié précisément pour permettre le contrôle de l'intérêt professionnel.
+            La copie de la carte grise doit être annexée.
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION DES SOCIÉTÉS (À REMPLIR ICI)
+        // ==========================================
+        const societes = [
+            {
+                nom: "SAS LAMPROIE",
+                adresse: "Pont de Rose, 33550 Langoiran",
+                siret: "433 473 337 00015"
+            },
+            {
+                nom: "SAS COUSTUT",
+                adresse: "Zi de Calens RN 11, 33640 Beautiran",
+                siret: "349 555 185 00017"
+            },
+            {
+                nom: "SAS BAKITO",
+                adresse: "366 av François Mitterrand, 33540 Sauveterre de Guyenne",
+                siret: "" // À compléter si besoin
+            }
+        ];
+
+        // 1. Initialisation de la liste déroulante
+        const selector = document.getElementById('companySelector');
+        societes.forEach((soc, index) => {
+            let option = document.createElement('option');
+            option.value = index;
+            option.text = soc.nom;
+            selector.add(option);
+        });
+
+        // 2. Fonction pour remplir les champs quand on change de société
+        function changerSociete() {
+            const index = selector.value;
+            if (index !== "") {
+                const s = societes[index];
+                document.getElementById('soc_nom').value = s.nom;
+                document.getElementById('soc_adresse').value = s.adresse;
+                document.getElementById('soc_siret').value = s.siret;
+            } else {
+                // Si on remet sur "Selectionner", on vide
+                document.getElementById('soc_nom').value = "";
+                document.getElementById('soc_adresse').value = "";
+                document.getElementById('soc_siret').value = "";
+            }
+        }
+
+        // 3. Gestion des lignes
+        function ajouterLigne() {
+            const tbody = document.querySelector('#tableTrajets tbody');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td><input type="date"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="number" class="km-input" placeholder="0" oninput="calculerTotaux()"></td>
+                <td class="col-action">
+                    <button class="btn-del" onclick="supprimerLigne(this)" title="Supprimer la ligne">×</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        function supprimerLigne(btn) {
+            // Remonte au parent <tr> et le supprime
+            const row = btn.closest('tr');
+            row.remove();
+            calculerTotaux(); // Recalcule après suppression
+        }
+
+        // 4. Calculs
+        function calculerTotaux() {
+            const inputs = document.querySelectorAll('.km-input');
+            let totalKm = 0;
+
+            inputs.forEach(inp => {
+                const val = parseFloat(inp.value);
+                if (!isNaN(val)) {
+                    totalKm += val;
+                }
+            });
+
+            document.getElementById('totalKmDisplay').innerText = totalKm;
+            calculerMontant(totalKm);
+        }
+
+        function calculerMontant(km = null) {
+            // Si km n'est pas fourni, on le récupère du texte
+            if (km === null) {
+                km = parseFloat(document.getElementById('totalKmDisplay').innerText) || 0;
+            }
+
+            const taux = parseFloat(document.getElementById('tauxInput').value) || 0;
+            const totalEuros = km * taux;
+
+            document.getElementById('montantFinal').innerText = totalEuros.toFixed(2);
+        }
+
+        // Au chargement, on ajoute 4 lignes vides
+        window.onload = function () {
+            for (let i = 0; i < 4; i++) ajouterLigne();
+        };
+    </script>
+</body>
+
+</html>

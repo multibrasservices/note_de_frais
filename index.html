@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note de Frais Kilométriques - Multi-Sociétés</title>
+    <title>Note de Frais Kilométriques</title>
     <style>
         :root {
             --primary: #2c3e50;
@@ -21,36 +22,31 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px;
             color: var(--text-color);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
-        /* Container A4 */
         .page-a4 {
             background: var(--card-bg);
             width: 210mm;
-            min-height: 297mm;
             margin: 0 auto;
-            padding: 20mm;
+            padding: 12mm;
             box-shadow: var(--shadow);
             box-sizing: border-box;
-            position: relative;
             border-radius: 8px;
         }
 
-        /* Header de configuration */
         .config-bar {
             background: white;
-            color: var(--text-color);
             padding: 15px 25px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 210mm;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 20px auto;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
         }
@@ -69,7 +65,6 @@
             min-width: 250px;
             background-color: #f9fafb;
             cursor: pointer;
-            transition: border-color 0.2s;
         }
 
         .config-bar select:focus {
@@ -85,165 +80,224 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        
-        .btn-print:hover { background: var(--primary-light); }
 
-        /* Header avec Logo */
+        .btn-print:hover {
+            background: var(--primary-light);
+        }
+
         .header-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 2px solid var(--border-color);
-            margin-bottom: 40px;
-            padding-bottom: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
         }
 
         .header-container h1 {
-            border-bottom: none;
             margin: 0;
-            padding: 0;
             flex-grow: 1;
             text-align: right;
             text-transform: uppercase;
-            font-size: 24px;
+            font-size: 20px;
             color: var(--primary);
             letter-spacing: 1px;
         }
 
         .logo {
-            height: 80px;
+            height: 50px;
             width: auto;
-            object-fit: contain;
         }
 
         h2 {
-            font-size: 16px;
+            font-size: 13px;
             background: #f8fafc;
-            padding: 10px 15px;
+            padding: 6px 10px;
             border-left: 4px solid var(--primary);
-            margin-top: 30px;
-            margin-bottom: 15px;
+            margin-top: 12px;
+            margin-bottom: 8px;
             color: var(--primary);
             font-weight: 600;
             border-radius: 0 4px 4px 0;
         }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-        .field-group { margin-bottom: 15px; }
-        .field-group label { 
-            display: block; 
-            font-size: 12px; 
-            color: #6b7280; 
-            font-weight: 600; 
-            margin-bottom: 6px;
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .field-group {
+            margin-bottom: 8px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 10px;
+            color: #6b7280;
+            font-weight: 600;
+            margin-bottom: 4px;
             text-transform: uppercase;
         }
-        
+
+        /* INPUTS - BLEU CLAIR POUR LES DISTINGUER */
         input {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            padding: 6px 8px;
+            border: 2px solid #3b82f6;
+            border-radius: 4px;
             font-family: inherit;
-            font-size: 14px;
+            font-size: 12px;
             box-sizing: border-box;
-            transition: all 0.2s;
+            background-color: #eff6ff;
+        }
+
+        input:focus {
+            border-color: #1d4ed8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             background-color: #fff;
         }
 
-        input:focus { 
-            border-color: var(--primary); 
-            outline: none; 
-            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
-        }
-
-        /* Tableaux */
-        table { 
-            width: 100%; 
-            border-collapse: separate; 
+        table {
+            width: 100%;
+            border-collapse: separate;
             border-spacing: 0;
-            margin-top: 20px; 
-            font-size: 13px; 
+            margin-top: 15px;
+            font-size: 11px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
         }
-        
-        th, td { 
-            border-bottom: 1px solid var(--border-color); 
-            padding: 12px 15px; 
-            text-align: left; 
+
+        th,
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 10px;
+            text-align: left;
         }
-        
-        th { 
-            background: #f8fafc; 
-            color: var(--primary); 
+
+        th {
+            background: #f8fafc;
+            color: var(--primary);
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
+            font-size: 10px;
+            letter-spacing: 0.3px;
         }
 
-        tr:last-child td { border-bottom: none; }
-        
-        /* Colonnes spécifiques */
-        .col-date { width: 110px; }
-        .col-km { width: 80px; text-align: right; }
-        .col-action { width: 40px; text-align: center; background: white; border-left: 1px solid var(--border-color); }
+        tr:last-child td {
+            border-bottom: none;
+        }
 
-        /* Inputs dans le tableau */
+        .col-date {
+            width: 110px;
+        }
+
+        .col-km {
+            width: 70px;
+            text-align: right;
+        }
+
+        .col-action {
+            width: 35px;
+            text-align: center;
+            background: white;
+            border-left: 1px solid var(--border-color);
+        }
+
+        /* INPUTS DANS LE TABLEAU - BLEU CLAIR */
         td input {
-            border: 1px solid transparent;
-            background: transparent;
-            padding: 5px;
+            border: 2px solid #3b82f6;
+            background: #eff6ff;
+            padding: 4px;
+            min-width: 120px;
         }
-        td input:hover { border-color: var(--border-color); background: white; }
-        td input:focus { border-color: var(--primary); background: white; }
+
+        td input:hover {
+            border-color: #2563eb;
+            background: #dbeafe;
+        }
+
+        td input:focus {
+            border-color: #1d4ed8;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .row-justification {
+            background: #f9fafb;
+        }
+
+        .row-justification td {
+            padding: 6px 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* TEXTAREA - VERT CLAIR POUR LE DISTINGUER DES INPUTS */
+        .row-justification textarea {
+            width: 100%;
+            min-height: 45px;
+            padding: 6px;
+            border: 2px solid #10b981;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 11px;
+            resize: vertical;
+            box-sizing: border-box;
+            background-color: #ecfdf5;
+        }
+
+        .row-justification textarea:focus {
+            border-color: #059669;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+            background-color: #fff;
+        }
 
         .btn-del {
-            background: #fee2e2; 
-            border: none; 
-            color: var(--accent); 
-            cursor: pointer; 
-            width: 24px;
-            height: 24px;
+            background: #fee2e2;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            width: 22px;
+            height: 22px;
             border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px; 
+            font-size: 14px;
             font-weight: bold;
-            transition: all 0.2s;
         }
-        .btn-del:hover { background: var(--accent); color: white; }
+
+        .btn-del:hover {
+            background: var(--accent);
+            color: white;
+        }
 
         .btn-add-row {
-            margin-top: 15px;
+            margin-top: 10px;
             background: white;
             color: var(--success);
             border: 1px solid var(--success);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
-        .btn-add-row:hover { background: var(--success); color: white; }
 
-        /* Totaux et Signatures */
+        .btn-add-row:hover {
+            background: var(--success);
+            color: white;
+        }
+
         .totals-section {
-            margin-top: 30px;
+            margin-top: 15px;
             display: flex;
             justify-content: flex-end;
         }
@@ -251,7 +305,7 @@
         .total-box {
             width: 40%;
             background: #f8fafc;
-            padding: 20px;
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
@@ -259,94 +313,134 @@
         .total-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            align-items: center;
-            font-size: 14px;
+            margin-bottom: 8px;
+            font-size: 12px;
         }
 
-        .final-amount { 
-            font-size: 20px; 
-            font-weight: 700; 
-            color: var(--primary); 
-            border-top: 2px solid var(--border-color); 
-            padding-top: 15px; 
+        .final-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            border-top: 2px solid var(--border-color);
+            padding-top: 10px;
             margin-top: 5px;
         }
 
         .signatures {
-            margin-top: 60px;
+            margin-top: 20px;
             display: flex;
             justify-content: space-between;
-            gap: 40px;
+            gap: 20px;
         }
-        .sign-block { 
+
+        .sign-block {
             flex: 1;
-            border: 1px solid var(--border-color); 
-            padding: 20px; 
-            font-size: 13px; 
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            font-size: 11px;
             border-radius: 8px;
-            height: 150px;
+            height: 100px;
             background: #fff;
         }
-        
-        .sign-block strong { display: block; margin-bottom: 5px; color: var(--primary); }
 
-        .footer-legal {
-            margin-top: 50px;
-            font-size: 10px;
-            color: #9ca3af;
-            text-align: center;
-            line-height: 1.6;
-            max-width: 80%;
-            margin-left: auto;
-            margin-right: auto;
+        .sign-block strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary);
         }
 
-        /* IMPRESSION */
+        .footer-legal {
+            margin-top: 15px;
+            font-size: 8px;
+            color: #9ca3af;
+            text-align: center;
+            line-height: 1.3;
+        }
+
         @media print {
-            body { background: none; margin: 0; padding: 0; }
-            .page-a4 { 
-                box-shadow: none; 
-                margin: 0; 
-                width: 100%; 
-                padding: 0; 
-                min-height: auto; 
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page-a4 {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                padding: 8mm;
                 border: none;
             }
-            .config-bar, .btn-add-row, .col-action, .btn-del { display: none !important; }
-            th.col-action, td.col-action { display: none; }
-            
-            input { 
-                border: none; 
+
+            .config-bar,
+            .btn-add-row,
+            .col-action,
+            .btn-del {
+                display: none !important;
+            }
+
+            th.col-action,
+            td.col-action {
+                display: none;
+            }
+
+            input,
+            textarea {
+                border: none;
                 padding: 0;
                 background: transparent !important;
             }
-            
-            /* Souligner les champs vides pour l'impression si nécessaire */
-            input[value=""] { border-bottom: 1px dotted #ccc; }
-            
-            h2 { background: none; border-left: none; border-bottom: 2px solid var(--primary); padding-left: 0; }
-            th { background: none; color: black; border-bottom: 2px solid black; }
-            td { border-bottom: 1px solid #ddd; }
-            .total-box { background: none; border: 2px solid black; }
+
+            input[value=""],
+            textarea:empty {
+                border-bottom: 1px dotted #ccc;
+            }
+
+            h2 {
+                background: none;
+                border-left: none;
+                border-bottom: 2px solid var(--primary);
+                padding-left: 0;
+            }
+
+            th {
+                background: none;
+                color: black;
+                border-bottom: 2px solid black;
+            }
+
+            td {
+                border-bottom: 1px solid #ddd;
+            }
+
+            .total-box {
+                background: none;
+                border: 2px solid black;
+            }
+
+            .row-justification {
+                background: none;
+            }
+
+            .row-justification td {
+                padding: 4px 10px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- BARRE DE CONFIGURATION (Invisible à l'impression) -->
     <div class="config-bar">
         <div style="display:flex; gap:10px; align-items:center;">
             <label>Choisir la structure :</label>
             <select id="companySelector" onchange="changerSociete()">
                 <option value="">-- Sélectionner une société --</option>
-                <!-- Les options sont remplies par JS -->
             </select>
         </div>
         <button class="btn-print" onclick="window.print()">🖨️ Imprimer / PDF</button>
     </div>
 
-    <!-- DOCUMENT A4 -->
     <div class="page-a4">
         <div class="header-container">
             <img src="./images/logo.jpg" alt="Logo" class="logo">
@@ -354,7 +448,6 @@
         </div>
 
         <div class="grid-2">
-            <!-- SOCIÉTÉ -->
             <div>
                 <h2>1. L'Entreprise</h2>
                 <div class="field-group">
@@ -371,7 +464,6 @@
                 </div>
             </div>
 
-            <!-- SALARIÉ -->
             <div>
                 <h2>2. Le Bénéficiaire</h2>
                 <div class="field-group">
@@ -389,8 +481,7 @@
             </div>
         </div>
 
-        <!-- VÉHICULE -->
-        <h2>3. Véhicule (Obligatoire pour calcul URSSAF)</h2>
+        <h2>3. Véhicule</h2>
         <div class="grid-4">
             <div class="field-group">
                 <label>Marque / Modèle</label>
@@ -401,7 +492,7 @@
                 <input type="text" placeholder="AA-000-BB">
             </div>
             <div class="field-group">
-                <label>Puissance Fiscale (CV)</label>
+                <label>Puissance (CV)</label>
                 <input type="text" placeholder="ex: 5">
             </div>
             <div class="field-group">
@@ -410,7 +501,6 @@
             </div>
         </div>
 
-        <!-- TABLEAU TRAJETS -->
         <h2>4. Détail des déplacements</h2>
         <table id="tableTrajets">
             <thead>
@@ -418,18 +508,15 @@
                     <th class="col-date">Date</th>
                     <th>Départ</th>
                     <th>Arrivée</th>
-                    <th>Motif (Détaillé)</th>
+                    <th>Motif</th>
                     <th class="col-km">Km</th>
-                    <th class="col-action"></th> <!-- Colonne poubelle -->
+                    <th class="col-action"></th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Lignes générées par JS -->
-            </tbody>
+            <tbody></tbody>
         </table>
         <button class="btn-add-row" onclick="ajouterLigne()">+ Ajouter une ligne</button>
 
-        <!-- CALCULS -->
         <div class="totals-section">
             <div class="total-box">
                 <div class="total-row">
@@ -437,8 +524,9 @@
                     <strong id="totalKmDisplay">0</strong>
                 </div>
                 <div class="total-row">
-                    <span>Barème appliqué (€/km) :</span>
-                    <input type="number" id="tauxInput" step="0.001" value="0.603" style="width: 80px; text-align:right;" oninput="calculerMontant()">
+                    <span>Barème (€/km) :</span>
+                    <input type="number" id="tauxInput" step="0.001" value="0.603"
+                        style="width: 70px; text-align:right;" oninput="calculerMontant()">
                 </div>
                 <div class="total-row final-amount">
                     <span>TOTAL À REMBOURSER :</span>
@@ -447,49 +535,34 @@
             </div>
         </div>
 
-        <!-- SIGNATURES -->
         <div class="signatures">
             <div class="sign-block">
                 <strong>Le Salarié / Demandeur</strong><br>
-                <span style="font-size:10px; color:#666;">Je certifie l'exactitude des frais et être assuré pour usage pro.</span>
-                <div style="margin-top:15px;">Date : <input type="date" style="display:inline; width:auto; border:none;"></div>
-                <div style="margin-top:15px;">Signature :</div>
+                <span style="font-size:9px; color:#666;">Je certifie l'exactitude des frais.</span>
+                <div style="margin-top:10px;">Date : <input type="date"
+                        style="display:inline; width:auto; border:none;"></div>
+                <div style="margin-top:10px;">Signature :</div>
             </div>
             <div class="sign-block">
-                <strong>L'Entreprise (Validation)</strong><br>
-                <span style="font-size:10px; color:#666;">Bon pour accord.</span>
-                <div style="margin-top:50px;">Signature :</div>
+                <strong>L'Entreprise</strong><br>
+                <span style="font-size:9px; color:#666;">Bon pour accord.</span>
+                <div style="margin-top:40px;">Signature :</div>
             </div>
         </div>
 
         <div class="footer-legal">
-            Justificatif comptable à conserver. En application de l'article L. 242-1 du Code de la sécurité sociale. Le motif du déplacement doit être justifié précisément pour permettre le contrôle de l'intérêt professionnel. La copie de la carte grise doit être annexée.
+            Justificatif comptable à conserver. En application de l'article L. 242-1 du Code de la sécurité sociale.
+            Le motif du déplacement doit être justifié précisément. Copie de la carte grise à annexer.
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // CONFIGURATION DES SOCIÉTÉS (À REMPLIR ICI)
-        // ==========================================
         const societes = [
-            {
-                nom: "SAS LAMPROIE",
-                adresse: "Pont de Rose, 33550 Langoiran",
-                siret: "433 473 337 00015"
-            },
-            {
-                nom: "SAS COUSTUT",
-                adresse: "Zi de Calens RN 11, 33640 Beautiran",
-                siret: "349 555 185 00017"
-            },
-            {
-                nom: "SAS BAKITO",
-                adresse: "366 av François Mitterrand, 33540 Sauveterre de Guyenne",
-                siret: "" // À compléter si besoin
-            }
+            { nom: "SAS LAMPROIE", adresse: "Pont de Rose, 33550 Langoiran", siret: "433 473 337 00015" },
+            { nom: "SAS COUSTUT", adresse: "Zi de Calens RN 11, 33640 Beautiran", siret: "349 555 185 00017" },
+            { nom: "SAS BAKITO", adresse: "366 av François Mitterrand, 33540 Sauveterre de Guyenne", siret: "" }
         ];
 
-        // 1. Initialisation de la liste déroulante
         const selector = document.getElementById('companySelector');
         societes.forEach((soc, index) => {
             let option = document.createElement('option');
@@ -498,7 +571,6 @@
             selector.add(option);
         });
 
-        // 2. Fonction pour remplir les champs quand on change de société
         function changerSociete() {
             const index = selector.value;
             if (index !== "") {
@@ -507,70 +579,71 @@
                 document.getElementById('soc_adresse').value = s.adresse;
                 document.getElementById('soc_siret').value = s.siret;
             } else {
-                // Si on remet sur "Selectionner", on vide
                 document.getElementById('soc_nom').value = "";
                 document.getElementById('soc_adresse').value = "";
                 document.getElementById('soc_siret').value = "";
             }
         }
 
-        // 3. Gestion des lignes
         function ajouterLigne() {
             const tbody = document.querySelector('#tableTrajets tbody');
+
+            // Ligne de données
             const row = document.createElement('tr');
-            
+            row.className = 'row-data';
             row.innerHTML = `
                 <td><input type="date"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
+                <td><input type="text" placeholder="Lieu de départ"></td>
+                <td><input type="text" placeholder="Lieu d'arrivée"></td>
+                <td><input type="text" placeholder="Motif du déplacement"></td>
                 <td><input type="number" class="km-input" placeholder="0" oninput="calculerTotaux()"></td>
-                <td class="col-action">
-                    <button class="btn-del" onclick="supprimerLigne(this)" title="Supprimer la ligne">×</button>
-                </td>
+                <td class="col-action"><button class="btn-del" onclick="supprimerLigne(this)">×</button></td>
             `;
             tbody.appendChild(row);
+
+            // Ligne de justification
+            const justRow = document.createElement('tr');
+            justRow.className = 'row-justification';
+            justRow.innerHTML = `
+                <td colspan="6">
+                    <textarea placeholder="Justification / Contexte (optionnel) : détails sur le déplacement, personnes rencontrées, documents remis, etc."></textarea>
+                </td>
+            `;
+            tbody.appendChild(justRow);
         }
 
         function supprimerLigne(btn) {
-            // Remonte au parent <tr> et le supprime
             const row = btn.closest('tr');
+            // Supprimer aussi la ligne de justification suivante
+            const justRow = row.nextElementSibling;
+            if (justRow && justRow.classList.contains('row-justification')) {
+                justRow.remove();
+            }
             row.remove();
-            calculerTotaux(); // Recalcule après suppression
+            calculerTotaux();
         }
 
-        // 4. Calculs
         function calculerTotaux() {
             const inputs = document.querySelectorAll('.km-input');
             let totalKm = 0;
-            
             inputs.forEach(inp => {
                 const val = parseFloat(inp.value);
-                if (!isNaN(val)) {
-                    totalKm += val;
-                }
+                if (!isNaN(val)) totalKm += val;
             });
-
             document.getElementById('totalKmDisplay').innerText = totalKm;
             calculerMontant(totalKm);
         }
 
         function calculerMontant(km = null) {
-            // Si km n'est pas fourni, on le récupère du texte
-            if (km === null) {
-                km = parseFloat(document.getElementById('totalKmDisplay').innerText) || 0;
-            }
-            
+            if (km === null) km = parseFloat(document.getElementById('totalKmDisplay').innerText) || 0;
             const taux = parseFloat(document.getElementById('tauxInput').value) || 0;
-            const totalEuros = km * taux;
-            
-            document.getElementById('montantFinal').innerText = totalEuros.toFixed(2);
+            document.getElementById('montantFinal').innerText = (km * taux).toFixed(2);
         }
 
-        // Au chargement, on ajoute 4 lignes vides
-        window.onload = function() {
-            for(let i=0; i<4; i++) ajouterLigne();
+        window.onload = function () {
+            for (let i = 0; i < 4; i++) ajouterLigne();
         };
     </script>
 </body>
+
 </html>
