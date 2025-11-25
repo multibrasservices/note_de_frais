@@ -111,12 +111,12 @@
         }
 
         h2 {
-            font-size: 13px;
+            font-size: 14px;
             background: #f8fafc;
-            padding: 6px 10px;
+            padding: 10px 15px;
             border-left: 4px solid var(--primary);
-            margin-top: 12px;
-            margin-bottom: 8px;
+            margin-top: 30px;
+            margin-bottom: 20px;
             color: var(--primary);
             font-weight: 600;
             border-radius: 0 4px 4px 0;
@@ -135,7 +135,7 @@
         }
 
         .field-group {
-            margin-bottom: 8px;
+            margin-bottom: 20px;
         }
 
         .field-group label {
@@ -149,11 +149,11 @@
 
         input {
             width: 100%;
-            padding: 6px 8px;
+            padding: 10px 12px;
             border: 2px solid #3b82f6;
-            border-radius: 4px;
+            border-radius: 6px;
             font-family: inherit;
-            font-size: 12px;
+            font-size: 13px;
             box-sizing: border-box;
             background-color: #eff6ff;
         }
@@ -174,12 +174,13 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
+            table-layout: fixed;
         }
 
         th,
         td {
             border-bottom: 1px solid var(--border-color);
-            padding: 8px 10px;
+            padding: 12px 15px;
             text-align: left;
         }
 
@@ -197,23 +198,28 @@
         }
 
         .col-date {
-            width: 100px;
+            width: 12%;
         }
 
         .col-motif {
-            width: 50%;
+            width: 43%;
         }
 
         .col-km {
-            width: 50px;
+            width: 6%;
             text-align: right;
         }
 
         .col-action {
-            width: 35px;
+            width: 3%;
             text-align: center;
             background: white;
             border-left: 1px solid var(--border-color);
+        }
+
+        th.col-depart,
+        th.col-arrivee {
+            width: 18%;
         }
 
         td input {
@@ -549,8 +555,8 @@
             <thead>
                 <tr>
                     <th class="col-date">Date</th>
-                    <th>Départ</th>
-                    <th>Arrivée</th>
+                    <th class="col-depart">Départ</th>
+                    <th class="col-arrivee">Arrivée</th>
                     <th class="col-motif">Motif</th>
                     <th class="col-km">Km</th>
                     <th class="col-action"></th>
