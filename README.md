@@ -30,7 +30,7 @@ Pour rendre cette page accessible en ligne via GitHub :
    - Sous **Source**, sélectionnez `Deploy from a branch`.
    - Sous **Branch**, choisissez `main` (ou `master`) et le dossier `/root`.
    - Cliquez sur **Save**.
-5. Votre site sera accessible à l'adresse : `https://<votre-pseudo>.github.io/<nom-du-depot>/note_frais.html`
+5. Votre site sera accessible à l'adresse : [https://multibrasservices.github.io/note_de_frais/](https://multibrasservices.github.io/note_de_frais/)
 
 ## Personnalisation
 

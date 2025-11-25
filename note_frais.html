@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,8 @@
         :root {
             --primary: #2c3e50;
             --secondary: #34495e;
-            --accent: #e74c3c; /* Rouge pour supprimer */
+            --accent: #e74c3c;
+            /* Rouge pour supprimer */
             --light: #f9f9f9;
             --border: #bdc3c7;
         }
@@ -27,8 +29,9 @@
             width: 210mm;
             min-height: 297mm;
             margin: 0 auto;
-            padding: 20mm; /* Marges standard */
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20mm;
+            /* Marges standard */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             position: relative;
         }
@@ -62,11 +65,491 @@
             padding: 8px 15px;
             border-radius: 4px;
             cursor: pointer;
-const societes = [
-    {
-        nom: "CABINET TICÔK & ASSOCIES",
-        adresse: "12 Rue de la Comptabilité, 75000 Paris",
-        siret: "123 456 789 00012"
-    },
-    // ...
-];
+            font-weight: bold;
+        }
+
+        .btn-print:hover {
+            background: #eee;
+        }
+
+        /* Header avec Logo */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+        .header-container h1 {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            flex-grow: 1;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        h2 {
+            font-size: 14px;
+            background: #ecf0f1;
+            padding: 5px 10px;
+            border-left: 5px solid var(--primary);
+            margin-top: 20px;
+            color: var(--secondary);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .field-group {
+            margin-bottom: 8px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 11px;
+            color: #7f8c8d;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 13px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: #fdfdfd;
+        }
+
+        /* Tableaux */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            font-weight: normal;
+        }
+
+        /* Colonnes spécifiques */
+        .col-date {
+            width: 90px;
+        }
+
+        .col-km {
+            width: 60px;
+            text-align: right;
+        }
+
+        .col-action {
+            width: 30px;
+            text-align: center;
+            border: none;
+            background: white;
+        }
+
+        .btn-del {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-del:hover {
+            color: darkred;
+        }
+
+        .btn-add-row {
+            margin-top: 10px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* Totaux et Signatures */
+        .totals-section {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .total-box {
+            width: 50%;
+            border: 2px solid var(--primary);
+            padding: 15px;
+            background: #f8f9fa;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .final-amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .signatures {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            height: 120px;
+        }
+
+        .sign-block {
+            width: 45%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .footer-legal {
+            margin-top: 30px;
+            font-size: 9px;
+            color: #95a5a6;
+            text-align: justify;
+            font-style: italic;
+        }
+
+        /* IMPRESSION */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page-a4 {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                padding: 0;
+                min-height: auto;
+            }
+
+            .config-bar,
+            .btn-add-row,
+            .col-action,
+            .btn-del {
+                display: none !important;
+            }
+
+            /* On cache la colonne action dans le tableau à l'impression */
+            th.col-action,
+            td.col-action {
+                display: none;
+            }
+
+            input {
+                border: none;
+                border-bottom: 1px dotted #ccc;
+                background: transparent;
+                padding: 0;
+            }
+
+            /* Optionnel: masquer les placeholders à l'impression */
+            input::placeholder {
+                color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRE DE CONFIGURATION (Invisible à l'impression) -->
+    <div class="config-bar">
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label>Choisir la structure :</label>
+            <select id="companySelector" onchange="changerSociete()">
+                <option value="">-- Sélectionner une société --</option>
+                <!-- Les options sont remplies par JS -->
+            </select>
+        </div>
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimer / PDF</button>
+    </div>
+
+    <!-- DOCUMENT A4 -->
+    <div class="page-a4">
+        <div class="header-container">
+            <img src="images/logo_bm.jpg" alt="Logo" class="logo">
+            <h1>État de Frais Kilométriques</h1>
+        </div>
+
+        <div class="grid-2">
+            <!-- SOCIÉTÉ -->
+            <div>
+                <h2>1. L'Entreprise</h2>
+                <div class="field-group">
+                    <label>Dénomination Sociale</label>
+                    <input type="text" id="soc_nom" placeholder="Nom de la société...">
+                </div>
+                <div class="field-group">
+                    <label>Adresse</label>
+                    <input type="text" id="soc_adresse" placeholder="Adresse complète...">
+                </div>
+                <div class="field-group">
+                    <label>N° SIRET</label>
+                    <input type="text" id="soc_siret" placeholder="XXX XXX XXX XXXXX">
+                </div>
+            </div>
+
+            <!-- SALARIÉ -->
+            <div>
+                <h2>2. Le Bénéficiaire</h2>
+                <div class="field-group">
+                    <label>Nom et Prénom</label>
+                    <input type="text" placeholder="ex: Ton Nom">
+                </div>
+                <div class="field-group">
+                    <label>Fonction</label>
+                    <input type="text" placeholder="ex: Gérant / Salarié">
+                </div>
+                <div class="field-group">
+                    <label>Adresse personnelle</label>
+                    <input type="text" placeholder="Adresse perso...">
+                </div>
+            </div>
+        </div>
+
+        <!-- VÉHICULE -->
+        <h2>3. Véhicule (Obligatoire pour calcul URSSAF)</h2>
+        <div class="grid-4">
+            <div class="field-group">
+                <label>Marque / Modèle</label>
+                <input type="text" placeholder="ex: Renault Clio">
+            </div>
+            <div class="field-group">
+                <label>Immatriculation</label>
+                <input type="text" placeholder="AA-000-BB">
+            </div>
+            <div class="field-group">
+                <label>Puissance Fiscale (CV)</label>
+                <input type="text" placeholder="ex: 5">
+            </div>
+            <div class="field-group">
+                <label>Carburant</label>
+                <input type="text" placeholder="Diesel/Essence">
+            </div>
+        </div>
+
+        <!-- TABLEAU TRAJETS -->
+        <h2>4. Détail des déplacements</h2>
+        <table id="tableTrajets">
+            <thead>
+                <tr>
+                    <th class="col-date">Date</th>
+                    <th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Motif (Détaillé)</th>
+                    <th class="col-km">Km</th>
+                    <th class="col-action"></th> <!-- Colonne poubelle -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Lignes générées par JS -->
+            </tbody>
+        </table>
+        <button class="btn-add-row" onclick="ajouterLigne()">+ Ajouter une ligne</button>
+
+        <!-- CALCULS -->
+        <div class="totals-section">
+            <div class="total-box">
+                <div class="total-row">
+                    <span>Total Kilomètres :</span>
+                    <strong id="totalKmDisplay">0</strong>
+                </div>
+                <div class="total-row">
+                    <span>Barème appliqué (€/km) :</span>
+                    <input type="number" id="tauxInput" step="0.001" value="0.603"
+                        style="width: 80px; text-align:right;" oninput="calculerMontant()">
+                </div>
+                <div class="total-row final-amount">
+                    <span>TOTAL À REMBOURSER :</span>
+                    <span><span id="montantFinal">0.00</span> €</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIGNATURES -->
+        <div class="signatures">
+            <div class="sign-block">
+                <strong>Le Salarié / Demandeur</strong><br>
+                <span style="font-size:10px; color:#666;">Je certifie l'exactitude des frais et être assuré pour usage
+                    pro.</span>
+                <div style="margin-top:15px;">Date : <input type="date"
+                        style="display:inline; width:auto; border:none;"></div>
+                <div style="margin-top:15px;">Signature :</div>
+            </div>
+            <div class="sign-block">
+                <strong>L'Entreprise (Validation)</strong><br>
+                <span style="font-size:10px; color:#666;">Bon pour accord.</span>
+                <div style="margin-top:50px;">Signature :</div>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            Justificatif comptable à conserver. En application de l'article L. 242-1 du Code de la sécurité sociale. Le
+            motif du déplacement doit être justifié précisément pour permettre le contrôle de l'intérêt professionnel.
+            La copie de la carte grise doit être annexée.
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION DES SOCIÉTÉS (À REMPLIR ICI)
+        // ==========================================
+        const societes = [
+            {
+                nom: "SAS LAMPROIE",
+                adresse: "Pont de Rose, 33550 Langoiran",
+                siret: "433 473 337 00015"
+            },
+            {
+                nom: "SAS COUSTUT",
+                adresse: "Zi de Calens RN 11, 33640 Beautiran",
+                siret: "349 555 185 00017"
+            },
+            {
+                nom: "SAS BAKITO",
+                adresse: "366 av François Mitterrand, 33540 Sauveterre de Guyenne",
+                siret: "" // À compléter si besoin
+            }
+        ];
+
+        // 1. Initialisation de la liste déroulante
+        const selector = document.getElementById('companySelector');
+        societes.forEach((soc, index) => {
+            let option = document.createElement('option');
+            option.value = index;
+            option.text = soc.nom;
+            selector.add(option);
+        });
+
+        // 2. Fonction pour remplir les champs quand on change de société
+        function changerSociete() {
+            const index = selector.value;
+            if (index !== "") {
+                const s = societes[index];
+                document.getElementById('soc_nom').value = s.nom;
+                document.getElementById('soc_adresse').value = s.adresse;
+                document.getElementById('soc_siret').value = s.siret;
+            } else {
+                // Si on remet sur "Selectionner", on vide
+                document.getElementById('soc_nom').value = "";
+                document.getElementById('soc_adresse').value = "";
+                document.getElementById('soc_siret').value = "";
+            }
+        }
+
+        // 3. Gestion des lignes
+        function ajouterLigne() {
+            const tbody = document.querySelector('#tableTrajets tbody');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td><input type="date"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="number" class="km-input" placeholder="0" oninput="calculerTotaux()"></td>
+                <td class="col-action">
+                    <button class="btn-del" onclick="supprimerLigne(this)" title="Supprimer la ligne">×</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        function supprimerLigne(btn) {
+            // Remonte au parent <tr> et le supprime
+            const row = btn.closest('tr');
+            row.remove();
+            calculerTotaux(); // Recalcule après suppression
+        }
+
+        // 4. Calculs
+        function calculerTotaux() {
+            const inputs = document.querySelectorAll('.km-input');
+            let totalKm = 0;
+
+            inputs.forEach(inp => {
+                const val = parseFloat(inp.value);
+                if (!isNaN(val)) {
+                    totalKm += val;
+                }
+            });
+
+            document.getElementById('totalKmDisplay').innerText = totalKm;
+            calculerMontant(totalKm);
+        }
+
+        function calculerMontant(km = null) {
+            // Si km n'est pas fourni, on le récupère du texte
+            if (km === null) {
+                km = parseFloat(document.getElementById('totalKmDisplay').innerText) || 0;
+            }
+
+            const taux = parseFloat(document.getElementById('tauxInput').value) || 0;
+            const totalEuros = km * taux;
+
+            document.getElementById('montantFinal').innerText = totalEuros.toFixed(2);
+        }
+
+        // Au chargement, on ajoute 4 lignes vides
+        window.onload = function () {
+            for (let i = 0; i < 4; i++) ajouterLigne();
+        };
+    </script>
+</body>
+
+</html>
