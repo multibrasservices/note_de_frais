@@ -15,7 +15,7 @@ Ce projet est une application web simple (HTML/JS/CSS) permettant de générer e
 Il s'agit d'une application statique. Vous n'avez pas besoin de serveur backend.
 
 1. Clonez ce dépôt ou téléchargez les fichiers.
-2. Ouvrez le fichier `note_frais.html` dans votre navigateur web préféré.
+2. Ouvrez le fichier `index.html` dans votre navigateur web préféré.
 3. Remplissez les informations.
 4. Cliquez sur le bouton "Imprimer / PDF" pour générer le document final.
 
@@ -24,7 +24,7 @@ Il s'agit d'une application statique. Vous n'avez pas besoin de serveur backend.
 Pour rendre cette page accessible en ligne via GitHub :
 
 1. Créez un nouveau dépôt sur GitHub.
-2. Poussez les fichiers de ce projet (`note_frais.html`, dossier `images`, etc.) sur le dépôt.
+2. Poussez les fichiers de ce projet (`index.html`, dossier `images`, etc.) sur le dépôt.
 3. Allez dans les **Settings** du dépôt.
 4. Dans la section **Pages** (menu de gauche) :
    - Sous **Source**, sélectionnez `Deploy from a branch`.
@@ -34,7 +34,7 @@ Pour rendre cette page accessible en ligne via GitHub :
 
 ## Personnalisation
 
-Vous pouvez modifier la liste des sociétés directement dans le code Javascript en bas du fichier `note_frais.html` :
+Vous pouvez modifier la liste des sociétés directement dans le code Javascript en bas du fichier `index.html` :
 
 ```javascript
 const societes = [
