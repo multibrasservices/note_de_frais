@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Remboursement des Frais Kilométriques</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --secondary: #4a5568;
+            --accent: #2b6cb0;
+            --success: #276749;
+            --warning: #c05621;
+            --danger: #c53030;
+            --bg-light: #f7fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #1a202c;
+            --text-muted: #718096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .document {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+            border: 2px dashed rgba(255,255,255,0.3);
+        }
+
+        .logo-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .header-title h1 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .doc-number {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .doc-date {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        label .required {
+            color: var(--danger);
+            margin-left: 2px;
+        }
+
+        input, select, textarea {
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            background: var(--bg-light);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .company-info {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .company-info h4 {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .company-info p {
+            color: var(--secondary);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .company-info .siret {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(255,255,255,0.7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        /* Tableau des trajets */
+        .trajets-section {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .trajet-form {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .trajet-form.editing {
+            border-color: var(--warning);
+            box-shadow: 0 0 0 3px rgba(192, 86, 33, 0.1);
+        }
+
+        .trajet-form h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trajet-form.editing h4::after {
+            content: '(Modification en cours)';
+            font-size: 12px;
+            color: var(--warning);
+            font-weight: normal;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success) 0%, #234e3e 100%);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-sm {
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Tableau récapitulatif */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+        }
+
+        th {
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #f0f9ff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        /* Totaux */
+        .totals-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .totals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .total-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        .total-item label {
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .total-item .value {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'Libre Franklin', sans-serif;
+        }
+
+        .total-item.highlight {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .total-item.highlight .value {
+            font-size: 32px;
+        }
+
+        /* Barème */
+        .bareme-info {
+            background: #fffbeb;
+            border: 2px solid #f6e05e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .bareme-info h4 {
+            color: #744210;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .bareme-info p {
+            color: #975a16;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        /* Signatures */
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed var(--border);
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-box label {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid var(--text-dark);
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .signature-box p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .document-footer {
+            background: var(--bg-light);
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+
+        .document-footer p {
+            margin-bottom: 5px;
+        }
+
+        /* Boutons d'action principaux */
+        .main-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        /* Messages */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-info {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            color: #2b6cb0;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            color: #975a16;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+
+        .empty-state svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .container {
+                padding: 0;
+                max-width: none;
+            }
+
+            .document {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .header {
+                background: var(--primary) !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            thead {
+                background: var(--primary) !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .totals-section {
+                background: var(--primary) !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .header-right {
+                text-align: center;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .signatures {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="document">
+            <!-- En-tête -->
+            <div class="header">
+                <div class="header-left">
+                    <div class="logo-placeholder" id="logoContainer">
+                        <span>Logo</span>
+                    </div>
+                    <div class="header-title">
+                        <h1>Fiche de Frais Kilométriques</h1>
+                        <p>Demande de remboursement d'indemnités</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="doc-number">Réf. : <span id="docRef">FK-2024-001</span></div>
+                    <div class="doc-date">Période : <span id="periodeDisplay">-</span></div>
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- Section Société -->
+                <div class="section">
+                    <h3 class="section-title">Société</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="societe">Sélectionner la société <span class="required">*</span></label>
+                            <select id="societe" onchange="updateCompanyInfo()">
+                                <option value="">-- Choisir une société --</option>
+                                <option value="lamproie">SAS LAMPROIE</option>
+                                <option value="coustut">SAS COUSTUT</option>
+                                <option value="bakito">SAS BAKITO</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="periode">Période concernée <span class="required">*</span></label>
+                            <input type="month" id="periode" onchange="updatePeriode()">
+                        </div>
+                    </div>
+                    <div class="company-info" id="companyInfo" style="display: none;">
+                        <h4 id="companyName"></h4>
+                        <p id="companyAddress"></p>
+                        <span class="siret">SIRET : <span id="companySiret"></span></span>
+                    </div>
+                </div>
+
+                <!-- Section Salarié -->
+                <div class="section">
+                    <h3 class="section-title">Identification du Salarié</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nom">Nom <span class="required">*</span></label>
+                            <input type="text" id="nom" placeholder="Nom de famille">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom <span class="required">*</span></label>
+                            <input type="text" id="prenom" placeholder="Prénom">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="adresse">Adresse personnelle <span class="required">*</span></label>
+                            <input type="text" id="adresse" placeholder="Numéro, rue, code postal, ville">
+                        </div>
+                        <div class="form-group">
+                            <label for="fonction">Fonction / Poste</label>
+                            <input type="text" id="fonction" placeholder="Ex: Commercial, Technicien...">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service / Département</label>
+                            <input type="text" id="service" placeholder="Ex: Direction, Commercial...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Véhicule -->
+                <div class="section">
+                    <h3 class="section-title">Identification du Véhicule Personnel</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="typeVehicule">Type de véhicule <span class="required">*</span></label>
+                            <select id="typeVehicule">
+                                <option value="">-- Choisir --</option>
+                                <option value="voiture">Voiture</option>
+                                <option value="moto">Moto (> 50 cm³)</option>
+                                <option value="cyclomoteur">Cyclomoteur (≤ 50 cm³)</option>
+                                <option value="velo">Vélo / VAE</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="marque">Marque et modèle</label>
+                            <input type="text" id="marque" placeholder="Ex: Renault Clio">
+                        </div>
+                        <div class="form-group">
+                            <label for="immatriculation">Immatriculation <span class="required">*</span></label>
+                            <input type="text" id="immatriculation" placeholder="Ex: AB-123-CD" style="text-transform: uppercase;">
+                        </div>
+                        <div class="form-group">
+                            <label for="puissanceFiscale">Puissance fiscale (CV) <span class="required">*</span></label>
+                            <select id="puissanceFiscale">
+                                <option value="">-- Choisir --</option>
+                                <option value="3">3 CV et moins</option>
+                                <option value="4">4 CV</option>
+                                <option value="5">5 CV</option>
+                                <option value="6">6 CV</option>
+                                <option value="7">7 CV et plus</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="alert alert-info" style="margin-top: 15px;">
+                        <strong>📋 Justificatifs requis :</strong> Copie de la carte grise du véhicule à joindre obligatoirement.
+                    </div>
+                </div>
+
+                <!-- Section Trajets -->
+                <div class="section">
+                    <h3 class="section-title">Détail des Trajets</h3>
+                    
+                    <div class="trajets-section">
+                        <!-- Formulaire d'ajout/modification de trajet -->
+                        <div class="trajet-form no-print" id="trajetForm">
+                            <h4>➕ Ajouter un trajet</h4>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="trajetDate">Date du déplacement <span class="required">*</span></label>
+                                    <input type="date" id="trajetDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trajetMotif">Motif du déplacement <span class="required">*</span></label>
+                                    <input type="text" id="trajetMotif" placeholder="Ex: Rendez-vous client, Formation...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trajetDepart">Lieu de départ <span class="required">*</span></label>
+                                    <input type="text" id="trajetDepart" placeholder="Adresse ou ville de départ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trajetArrivee">Lieu d'arrivée <span class="required">*</span></label>
+                                    <input type="text" id="trajetArrivee" placeholder="Adresse ou ville d'arrivée">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trajetKm">Distance (km) <span class="required">*</span></label>
+                                    <input type="number" id="trajetKm" min="0" step="0.1" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trajetAR">Aller-retour ?</label>
+                                    <select id="trajetAR">
+                                        <option value="non">Non (aller simple)</option>
+                                        <option value="oui">Oui (×2)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary" onclick="ajouterTrajet()">
+                                    <span id="btnTrajetText">➕ Ajouter ce trajet</span>
+                                </button>
+                                <button type="button" class="btn btn-outline" id="btnAnnulerModif" onclick="annulerModification()" style="display: none;">
+                                    ✖ Annuler la modification
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tableau des trajets -->
+                        <div class="table-container" id="tableContainer" style="display: none;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;">N°</th>
+                                        <th>Date</th>
+                                        <th>Motif</th>
+                                        <th>Départ</th>
+                                        <th>Arrivée</th>
+                                        <th style="text-align: right;">Km</th>
+                                        <th class="no-print" style="width: 100px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trajetsTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="empty-state" id="emptyState">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                            </svg>
+                            <p>Aucun trajet enregistré</p>
+                            <p style="font-size: 13px;">Utilisez le formulaire ci-dessus pour ajouter des trajets</p>
+                        </div>
+                    </div>
+
+                    <!-- Barème -->
+                    <div class="bareme-info">
+                        <h4>📊 Barème kilométrique fiscal 2024 (véhicules automobiles)</h4>
+                        <p><strong>Jusqu'à 5 000 km :</strong> d × 0.529 (3CV) | d × 0.606 (4CV) | d × 0.636 (5CV) | d × 0.665 (6CV) | d × 0.697 (7CV+)</p>
+                        <p><strong>De 5 001 à 20 000 km :</strong> (d × 0.316) + 1065 (3CV) | (d × 0.340) + 1330 (4CV) | (d × 0.357) + 1395 (5CV) | (d × 0.374) + 1457 (6CV) | (d × 0.394) + 1515 (7CV+)</p>
+                        <p><strong>Au-delà de 20 000 km :</strong> d × 0.370 (3CV) | d × 0.407 (4CV) | d × 0.427 (5CV) | d × 0.447 (6CV) | d × 0.470 (7CV+)</p>
+                        <p style="margin-top: 10px; font-style: italic;">d = distance parcourue en km</p>
+                    </div>
+                </div>
+
+                <!-- Section Totaux -->
+                <div class="totals-section">
+                    <div class="totals-grid">
+                        <div class="total-item">
+                            <label>Nombre de trajets</label>
+                            <div class="value" id="totalTrajets">0</div>
+                        </div>
+                        <div class="total-item">
+                            <label>Distance totale</label>
+                            <div class="value"><span id="totalKm">0</span> km</div>
+                        </div>
+                        <div class="total-item highlight">
+                            <label>Indemnité à rembourser</label>
+                            <div class="value"><span id="totalIndemnite">0,00</span> €</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attestation -->
+                <div class="section" style="margin-top: 30px;">
+                    <div class="alert alert-warning">
+                        <strong>⚠️ Attestation sur l'honneur :</strong><br>
+                        Je soussigné(e) certifie sur l'honneur l'exactitude des informations portées sur ce document et m'engage à fournir, sur demande, tout justificatif complémentaire (carte grise, attestation d'assurance, etc.). Je certifie avoir utilisé mon véhicule personnel pour les déplacements professionnels mentionnés ci-dessus et ne pas avoir bénéficié d'un autre mode de transport pris en charge par l'employeur pour ces mêmes trajets.
+                    </div>
+                </div>
+
+                <!-- Signatures -->
+                <div class="signatures">
+                    <div class="signature-box">
+                        <label>Signature du salarié</label>
+                        <div class="signature-line"></div>
+                        <p>Date : _____ / _____ / _________</p>
+                        <p>Fait à : _________________________</p>
+                    </div>
+                    <div class="signature-box">
+                        <label>Visa de l'employeur</label>
+                        <div class="signature-line"></div>
+                        <p>Date : _____ / _____ / _________</p>
+                        <p>Cachet de l'entreprise</p>
+                    </div>
+                </div>
+
+                <!-- Boutons d'action -->
+                <div class="main-actions no-print">
+                    <button type="button" class="btn btn-primary" onclick="window.print()">
+                        🖨️ Imprimer / PDF
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="exporterDonnees()">
+                        💾 Exporter les données
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="reinitialiser()">
+                        🗑️ Réinitialiser
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pied de page -->
+            <div class="document-footer">
+                <p><strong>Document justificatif pour le remboursement des frais kilométriques</strong></p>
+                <p>Conformément aux dispositions de l'article 81 du Code général des impôts et aux directives URSSAF</p>
+                <p>À conserver pendant 3 ans (délai de prescription URSSAF)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données des sociétés en dur
+        const societes = {
+            lamproie: {
+                nom: "SAS LAMPROIE",
+                adresse: "Pont de Rose, 33550 Langoiran",
+                siret: "433 473 337 00015",
+                logo: "images/lamproie_logo.png"
+            },
+            coustut: {
+                nom: "SAS COUSTUT",
+                adresse: "ZI de Calens RN 11, 33640 Beautiran",
+                siret: "349 555 185 00017",
+                logo: "images/coustut_logo.png"
+            },
+            bakito: {
+                nom: "SAS BAKITO",
+                adresse: "366 avenue François Mitterrand, 33540 Sauveterre de Guyenne",
+                siret: "Non renseigné",
+                logo: "images/bakito_logo.png"
+            }
+        };
+
+        // Barème kilométrique 2024 (voitures)
+        const bareme2024 = {
+            voiture: {
+                3: { jusqu5000: 0.529, de5001a20000: { coef: 0.316, add: 1065 }, plusDe20000: 0.370 },
+                4: { jusqu5000: 0.606, de5001a20000: { coef: 0.340, add: 1330 }, plusDe20000: 0.407 },
+                5: { jusqu5000: 0.636, de5001a20000: { coef: 0.357, add: 1395 }, plusDe20000: 0.427 },
+                6: { jusqu5000: 0.665, de5001a20000: { coef: 0.374, add: 1457 }, plusDe20000: 0.447 },
+                7: { jusqu5000: 0.697, de5001a20000: { coef: 0.394, add: 1515 }, plusDe20000: 0.470 }
+            },
+            moto: {
+                1: { jusqu3000: 0.395, de3001a6000: { coef: 0.099, add: 891 }, plusDe6000: 0.248 },
+                2: { jusqu3000: 0.468, de3001a6000: { coef: 0.082, add: 1158 }, plusDe6000: 0.275 },
+                3: { jusqu3000: 0.606, de3001a6000: { coef: 0.071, add: 1606 }, plusDe6000: 0.339 }
+            },
+            cyclomoteur: {
+                1: { jusqu3000: 0.315, de3001a6000: { coef: 0.079, add: 711 }, plusDe6000: 0.198 }
+            },
+            velo: {
+                1: { forfait: 0.25 }
+            }
+        };
+
+        // Liste des trajets
+        let trajets = [];
+        let editIndex = -1;
+
+        // Mise à jour des infos société
+        function updateCompanyInfo() {
+            const select = document.getElementById('societe');
+            const infoDiv = document.getElementById('companyInfo');
+            const logoContainer = document.getElementById('logoContainer');
+            
+            if (select.value && societes[select.value]) {
+                const soc = societes[select.value];
+                document.getElementById('companyName').textContent = soc.nom;
+                document.getElementById('companyAddress').textContent = soc.adresse;
+                document.getElementById('companySiret').textContent = soc.siret;
+                infoDiv.style.display = 'block';
+                
+                // Tentative de chargement du logo
+                const img = new Image();
+                img.onload = function() {
+                    logoContainer.innerHTML = '';
+                    logoContainer.appendChild(img);
+                };
+                img.onerror = function() {
+                    logoContainer.innerHTML = '<span>Logo</span>';
+                };
+                img.src = soc.logo;
+                img.alt = soc.nom;
+            } else {
+                infoDiv.style.display = 'none';
+                logoContainer.innerHTML = '<span>Logo</span>';
+            }
+            
+            genererReference();
+        }
+
+        // Mise à jour de la période
+        function updatePeriode() {
+            const periode = document.getElementById('periode').value;
+            if (periode) {
+                const [annee, mois] = periode.split('-');
+                const moisNoms = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 
+                                  'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+                document.getElementById('periodeDisplay').textContent = moisNoms[parseInt(mois) - 1] + ' ' + annee;
+            }
+            genererReference();
+        }
+
+        // Générer référence document
+        function genererReference() {
+            const societe = document.getElementById('societe').value;
+            const periode = document.getElementById('periode').value;
+            let ref = 'FK-';
+            
+            if (societe) {
+                ref += societe.substring(0, 3).toUpperCase() + '-';
+            }
+            if (periode) {
+                ref += periode.replace('-', '');
+            } else {
+                ref += new Date().getFullYear();
+            }
+            ref += '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+            
+            document.getElementById('docRef').textContent = ref;
+        }
+
+        // Ajouter ou modifier un trajet
+        function ajouterTrajet() {
+            const date = document.getElementById('trajetDate').value;
+            const motif = document.getElementById('trajetMotif').value.trim();
+            const depart = document.getElementById('trajetDepart').value.trim();
+            const arrivee = document.getElementById('trajetArrivee').value.trim();
+            let km = parseFloat(document.getElementById('trajetKm').value) || 0;
+            const ar = document.getElementById('trajetAR').value;
+
+            // Validation
+            if (!date || !motif || !depart || !arrivee || km <= 0) {
+                alert('Veuillez remplir tous les champs obligatoires du trajet.');
+                return;
+            }
+
+            // Si aller-retour, doubler les km
+            if (ar === 'oui') {
+                km = km * 2;
+            }
+
+            const trajet = {
+                date: date,
+                motif: motif,
+                depart: depart,
+                arrivee: arrivee,
+                km: km,
+                ar: ar
+            };
+
+            if (editIndex >= 0) {
+                // Mode modification
+                trajets[editIndex] = trajet;
+                editIndex = -1;
+                document.getElementById('trajetForm').classList.remove('editing');
+                document.getElementById('btnTrajetText').textContent = '➕ Ajouter ce trajet';
+                document.getElementById('btnAnnulerModif').style.display = 'none';
+            } else {
+                // Mode ajout
+                trajets.push(trajet);
+            }
+
+            // Réinitialiser le formulaire
+            resetTrajetForm();
+            
+            // Rafraîchir l'affichage
+            afficherTrajets();
+            calculerTotaux();
+        }
+
+        // Annuler la modification en cours
+        function annulerModification() {
+            editIndex = -1;
+            document.getElementById('trajetForm').classList.remove('editing');
+            document.getElementById('btnTrajetText').textContent = '➕ Ajouter ce trajet';
+            document.getElementById('btnAnnulerModif').style.display = 'none';
+            resetTrajetForm();
+        }
+
+        // Réinitialiser le formulaire de trajet
+        function resetTrajetForm() {
+            document.getElementById('trajetDate').value = '';
+            document.getElementById('trajetMotif').value = '';
+            document.getElementById('trajetDepart').value = '';
+            document.getElementById('trajetArrivee').value = '';
+            document.getElementById('trajetKm').value = '';
+            document.getElementById('trajetAR').value = 'non';
+        }
+
+        // Modifier un trajet
+        function modifierTrajet(index) {
+            const trajet = trajets[index];
+            
+            document.getElementById('trajetDate').value = trajet.date;
+            document.getElementById('trajetMotif').value = trajet.motif;
+            document.getElementById('trajetDepart').value = trajet.depart;
+            document.getElementById('trajetArrivee').value = trajet.arrivee;
+            // Si c'était un AR, diviser par 2 pour l'affichage
+            document.getElementById('trajetKm').value = trajet.ar === 'oui' ? trajet.km / 2 : trajet.km;
+            document.getElementById('trajetAR').value = trajet.ar;
+            
+            editIndex = index;
+            document.getElementById('trajetForm').classList.add('editing');
+            document.getElementById('btnTrajetText').textContent = '✓ Valider la modification';
+            document.getElementById('btnAnnulerModif').style.display = 'inline-flex';
+            
+            // Scroll vers le formulaire
+            document.getElementById('trajetForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Supprimer un trajet
+        function supprimerTrajet(index) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce trajet ?')) {
+                trajets.splice(index, 1);
+                
+                // Si on était en train de modifier ce trajet, annuler
+                if (editIndex === index) {
+                    annulerModification();
+                } else if (editIndex > index) {
+                    editIndex--;
+                }
+                
+                afficherTrajets();
+                calculerTotaux();
+            }
+        }
+
+        // Afficher les trajets dans le tableau
+        function afficherTrajets() {
+            const tbody = document.getElementById('trajetsTableBody');
+            const tableContainer = document.getElementById('tableContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (trajets.length === 0) {
+                tableContainer.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            tableContainer.style.display = 'block';
+            emptyState.style.display = 'none';
+            
+            tbody.innerHTML = '';
+            
+            trajets.forEach((trajet, index) => {
+                const tr = document.createElement('tr');
+                const dateFormatee = new Date(trajet.date).toLocaleDateString('fr-FR');
+                
+                tr.innerHTML = `
+                    <td><strong>${index + 1}</strong></td>
+                    <td>${dateFormatee}</td>
+                    <td>${trajet.motif}</td>
+                    <td>${trajet.depart}</td>
+                    <td>${trajet.arrivee}${trajet.ar === 'oui' ? ' <small>(A/R)</small>' : ''}</td>
+                    <td style="text-align: right; font-weight: 600;">${trajet.km.toFixed(1)}</td>
+                    <td class="no-print">
+                        <div class="actions-cell">
+                            <button class="btn btn-warning btn-icon btn-sm" onclick="modifierTrajet(${index})" title="Modifier">✏️</button>
+                            <button class="btn btn-danger btn-icon btn-sm" onclick="supprimerTrajet(${index})" title="Supprimer">🗑️</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Calculer les totaux et l'indemnité
+        function calculerTotaux() {
+            const totalTrajets = trajets.length;
+            const totalKm = trajets.reduce((sum, t) => sum + t.km, 0);
+            
+            document.getElementById('totalTrajets').textContent = totalTrajets;
+            document.getElementById('totalKm').textContent = totalKm.toFixed(1);
+            
+            // Calcul de l'indemnité selon le barème
+            const typeVehicule = document.getElementById('typeVehicule').value || 'voiture';
+            const puissance = parseInt(document.getElementById('puissanceFiscale').value) || 5;
+            
+            let indemnite = 0;
+            
+            if (typeVehicule === 'velo') {
+                indemnite = totalKm * 0.25;
+            } else if (typeVehicule === 'voiture') {
+                const cv = Math.min(Math.max(puissance, 3), 7);
+                const b = bareme2024.voiture[cv];
+                
+                if (totalKm <= 5000) {
+                    indemnite = totalKm * b.jusqu5000;
+                } else if (totalKm <= 20000) {
+                    indemnite = (totalKm * b.de5001a20000.coef) + b.de5001a20000.add;
+                } else {
+                    indemnite = totalKm * b.plusDe20000;
+                }
+            } else if (typeVehicule === 'moto') {
+                // Simplification : utiliser barème moto catégorie 2 (3-5 CV)
+                const b = bareme2024.moto[2];
+                if (totalKm <= 3000) {
+                    indemnite = totalKm * b.jusqu3000;
+                } else if (totalKm <= 6000) {
+                    indemnite = (totalKm * b.de3001a6000.coef) + b.de3001a6000.add;
+                } else {
+                    indemnite = totalKm * b.plusDe6000;
+                }
+            } else if (typeVehicule === 'cyclomoteur') {
+                const b = bareme2024.cyclomoteur[1];
+                if (totalKm <= 3000) {
+                    indemnite = totalKm * b.jusqu3000;
+                } else if (totalKm <= 6000) {
+                    indemnite = (totalKm * b.de3001a6000.coef) + b.de3001a6000.add;
+                } else {
+                    indemnite = totalKm * b.plusDe6000;
+                }
+            }
+            
+            document.getElementById('totalIndemnite').textContent = indemnite.toFixed(2).replace('.', ',');
+        }
+
+        // Exporter les données
+        function exporterDonnees() {
+            const data = {
+                societe: document.getElementById('societe').value,
+                periode: document.getElementById('periode').value,
+                salarie: {
+                    nom: document.getElementById('nom').value,
+                    prenom: document.getElementById('prenom').value,
+                    adresse: document.getElementById('adresse').value,
+                    fonction: document.getElementById('fonction').value,
+                    service: document.getElementById('service').value
+                },
+                vehicule: {
+                    type: document.getElementById('typeVehicule').value,
+                    marque: document.getElementById('marque').value,
+                    immatriculation: document.getElementById('immatriculation').value,
+                    puissance: document.getElementById('puissanceFiscale').value
+                },
+                trajets: trajets,
+                totaux: {
+                    nombreTrajets: trajets.length,
+                    totalKm: trajets.reduce((sum, t) => sum + t.km, 0),
+                    indemnite: document.getElementById('totalIndemnite').textContent
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `frais_km_${data.periode || 'export'}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Réinitialiser le formulaire
+        function reinitialiser() {
+            if (confirm('Êtes-vous sûr de vouloir réinitialiser tout le formulaire ? Toutes les données seront perdues.')) {
+                document.getElementById('societe').value = '';
+                document.getElementById('periode').value = '';
+                document.getElementById('nom').value = '';
+                document.getElementById('prenom').value = '';
+                document.getElementById('adresse').value = '';
+                document.getElementById('fonction').value = '';
+                document.getElementById('service').value = '';
+                document.getElementById('typeVehicule').value = '';
+                document.getElementById('marque').value = '';
+                document.getElementById('immatriculation').value = '';
+                document.getElementById('puissanceFiscale').value = '';
+                
+                trajets = [];
+                editIndex = -1;
+                
+                updateCompanyInfo();
+                afficherTrajets();
+                calculerTotaux();
+                annulerModification();
+            }
+        }
+
+        // Recalculer l'indemnité quand le type ou la puissance change
+        document.getElementById('typeVehicule').addEventListener('change', calculerTotaux);
+        document.getElementById('puissanceFiscale').addEventListener('change', calculerTotaux);
+
+        // Initialisation
+        genererReference();
+    </script>
+</body>
+</html>

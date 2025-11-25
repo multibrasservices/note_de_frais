@@ -13,7 +13,9 @@
             --success: #27ae60;
             --bg-color: #f3f4f6;
             --card-bg: #ffffff;
-            --text-color: #1f2937;
+            --text-color:
+
+                #1f2937;
             --border-color: #e5e7eb;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
@@ -197,30 +199,11 @@
         }
 
         .col-date {
-            width: 100px;
+            width: 110px;
         }
 
-        .col-motif {
-            width: 50%;
-        }
-
-        .col-km {
-            width: 50px;
-            text-align: right;
-        }
-
-        .col-action {
-            width: 35px;
-            text-align: center;
-            background: white;
-            border-left: 1px solid var(--border-color);
-        }
-
-        td input {
-            border: 2px solid #3b82f6;
-            background: #eff6ff;
-            padding: 4px;
-            min-width: 120px;
+        padding: 4px;
+        min-width: 120px;
         }
 
         td input:hover {
@@ -245,7 +228,6 @@
 
         .row-justification textarea {
             width: 100%;
-            max-width: 100%;
             min-height: 45px;
             padding: 6px;
             border: 2px solid #10b981;
